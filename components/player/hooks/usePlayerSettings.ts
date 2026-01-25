@@ -20,6 +20,8 @@ export function usePlayerSettings() {
             adFilter: stored.adFilter,
             adFilterMode: stored.adFilterMode,
             adKeywords: stored.adKeywords,
+            fullscreenType: stored.fullscreenType,
+            proxyMode: stored.proxyMode,
         };
     });
 
@@ -37,6 +39,8 @@ export function usePlayerSettings() {
                 adFilter: stored.adFilter,
                 adFilterMode: stored.adFilterMode,
                 adKeywords: stored.adKeywords,
+                fullscreenType: stored.fullscreenType,
+                proxyMode: stored.proxyMode,
             });
         });
         return unsubscribe;
@@ -89,6 +93,14 @@ export function usePlayerSettings() {
         updateSetting('adKeywords', value);
     }, [updateSetting]);
 
+    const setFullscreenType = useCallback((value: 'native' | 'window') => {
+        updateSetting('fullscreenType', value);
+    }, [updateSetting]);
+
+    const setProxyMode = useCallback((value: 'retry' | 'none' | 'always') => {
+        updateSetting('proxyMode', value);
+    }, [updateSetting]);
+
     return {
         ...settings,
         setAutoNextEpisode,
@@ -100,5 +112,7 @@ export function usePlayerSettings() {
         setAdFilter,
         setAdFilterMode,
         setAdKeywords,
+        setFullscreenType,
+        setProxyMode,
     };
 }
